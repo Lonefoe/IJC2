@@ -11,7 +11,7 @@ cbuffer* cb_create(int size) {
     cbuffer *cb = malloc(sizeof(cbuffer));
     cb->buffer = malloc(size * sizeof(char *));
     for (int i = 0; i < size; i++) {
-        cb->buffer[i] = malloc((MAX_LINE_LENGTH + 1) * sizeof(char)); // +1 for null-terminator
+        cb->buffer[i] = malloc((MAX_LINE_LENGTH + 1) * sizeof(char)); // +1 for null
     }
     cb->head = 0;
     cb->tail = -1;
@@ -21,7 +21,7 @@ cbuffer* cb_create(int size) {
 
 // Sets next element
 void cb_put(cbuffer *cb, char *line) {
-    if(cb->head == cb->tail) return;    // Buffer is full
+    if(cb->head == cb->tail && cb->size != 1) return;    // Buffer is full
     
     strcpy(cb->buffer[cb->head++], line);
     cb->head %= cb->size;
@@ -38,8 +38,7 @@ char* cb_get(cbuffer *cb) {
 
 // Frees allocated memory of a circular buffer
 void cb_free(cbuffer *cb) {
-    int i;
-    for (i = 0; i < cb->size; i++) {
+    for (int i = 0; i < cb->size; i++) {
         free(cb->buffer[(cb->head + i) % cb->size]);
     }
     free(cb->buffer);

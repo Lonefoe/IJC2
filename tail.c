@@ -2,7 +2,8 @@
 // Řešení IJC-DU2, příklad a), 13.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
-//
+// Program vytiskne poslednich N radku souboru
+// Limit radku: 4096 znaku
 
 #include "cbuffer.h"
 
@@ -24,6 +25,7 @@ int main(int argc, char** argv) {
     FILE *file = NULL;
     bool full_flag = 0;
 
+    // User arguments
     for (int i = 0; i < argc; i++)
     {
         if (argv[i][0] == '-')
@@ -68,6 +70,7 @@ int main(int argc, char** argv) {
     read_cbuffer(cb, line_num, full_flag);
 
     fclose(file);
+    cb_free(cb);
 
     return 0;
 }

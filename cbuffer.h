@@ -16,8 +16,8 @@
 
 typedef struct {
     char **buffer;  // Pointer to buffer, buffer = array of N strings
-    int head;       // First elem index
-    int tail;       // Last elem index
+    int head;       // Write elem index
+    int tail;       // Read elem index
     int size;       // Number of buffer elems
 } cbuffer;
 
