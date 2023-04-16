@@ -1,5 +1,5 @@
 // cbuffer.h
-// Řešení IJC-DU2, příklad a), 13.4.2023
+// Řešení IJC-DU2, příklad 1), 13.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
 // Deklaruje funkce pro kruhový buffer

@@ -1,5 +1,5 @@
 // cbuffer.c
-// Řešení IJC-DU2, příklad a), 13.4.2023
+// Řešení IJC-DU2, příklad 1), 13.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
 // Definuje funkce pro kruhový buffer
@@ -11,7 +11,7 @@ cbuffer* cb_create(int size) {
     cbuffer *cb = malloc(sizeof(cbuffer));
     cb->buffer = malloc(size * sizeof(char *));
     for (int i = 0; i < size; i++) {
-        cb->buffer[i] = malloc((MAX_LINE_LENGTH + 1) * sizeof(char)); // +1 for null
+        cb->buffer[i] = NULL;
     }
     cb->head = 0;
     cb->tail = -1;
@@ -23,6 +23,8 @@ cbuffer* cb_create(int size) {
 void cb_put(cbuffer *cb, char *line) {
     if(cb->head == cb->tail && cb->size != 1) return;    // Buffer is full
     
+    if(cb->buffer[cb->head] == NULL) cb->buffer[cb->head] = malloc(strlen(line) * sizeof(char));
+    else cb->buffer[cb->head] = realloc(cb->buffer[cb->head], strlen(line) * sizeof(char));
     strcpy(cb->buffer[cb->head++], line);
     cb->head %= cb->size;
     if(cb->tail == -1) cb->tail = 0;    // Init tail
@@ -39,7 +41,8 @@ char* cb_get(cbuffer *cb) {
 // Frees allocated memory of a circular buffer
 void cb_free(cbuffer *cb) {
     for (int i = 0; i < cb->size; i++) {
-        free(cb->buffer[(cb->head + i) % cb->size]);
+        if(cb->buffer[(cb->head + i) % cb->size] != NULL)
+            free(cb->buffer[(cb->head + i) % cb->size]);
     }
     free(cb->buffer);
     free(cb);

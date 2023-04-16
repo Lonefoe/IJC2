@@ -1,5 +1,5 @@
 // tail.c
-// Řešení IJC-DU2, příklad a), 13.4.2023
+// Řešení IJC-DU2, příklad 1), 13.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
 // Program vytiskne poslednich N radku souboru
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
                 if(num > 0) {
                     line_num = num;
                 } else {
-                    fprintf(stderr, "Error: Number of lines is less than 1.\n");
+                    fprintf(stderr, "Error: Invalid number. Accepted range: 1..N\n");
                     exit(1);
                 }
             }
@@ -48,9 +48,9 @@ int main(int argc, char** argv) {
     if(filename != NULL) {
         file = fopen(filename, "r");
 
-        if(file == NULL) 
+        if(file == NULL)
         {
-            fprintf(stderr, "Error: File could not be opened.\n");
+            fprintf(stderr, "Error: Cannot open file\n");
             exit(1);
         }
     } else file = stdin;    // Read from standard input
