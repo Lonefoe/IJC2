@@ -23,9 +23,9 @@ cbuffer* cb_create(int size) {
 void cb_put(cbuffer *cb, char *line) {
     if(cb->head == cb->tail && cb->size != 1) return;    // Buffer is full
     
-    if(cb->buffer[cb->head] == NULL) cb->buffer[cb->head] = malloc(strlen(line) * sizeof(char));
-    else cb->buffer[cb->head] = realloc(cb->buffer[cb->head], strlen(line) * sizeof(char));
-    strcpy(cb->buffer[cb->head++], line);
+    if(cb->buffer[cb->head] == NULL) cb->buffer[cb->head] = malloc((strlen(line) + 1) * sizeof(char));
+    else cb->buffer[cb->head] = realloc(cb->buffer[cb->head], (strlen(line) + 1) * sizeof(char));
+    strncpy(cb->buffer[cb->head++], line, (strlen(line) + 1) * sizeof(char));
     cb->head %= cb->size;
     if(cb->tail == -1) cb->tail = 0;    // Init tail
 }

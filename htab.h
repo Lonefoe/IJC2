@@ -9,11 +9,7 @@
 #include <stdbool.h>    // bool
 
 // Tabulka:
-struct htab {
-    size_t arr_size;        // velikost pole ukazatelů
-    size_t size;            // počet prvků v tabulce
-    htab_pair_t *arr[];     // pole ukazatelů na prvky tabulky
-};    // neúplná deklarace struktury - uživatel nevidí obsah
+struct htab; // neúplná deklarace struktury - uživatel nevidí obsah
 typedef struct htab htab_t;     // typedef podle zadání
 
 // Typy:

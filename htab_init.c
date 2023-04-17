@@ -5,17 +5,18 @@
 // 
 
 #include "htab.h"
+#include "htab_struct.h"
 
 htab_t* htab_init(const size_t n)
 {
-    htab_t *hashtab = malloc(sizeof(htab_t) + n * sizeof(htab_pair_t *));
-    if (hashtab == NULL) {
+    htab_t *h = malloc(sizeof(htab_t) + n * sizeof(htab_pair_t *));
+    if (h == NULL) {
         return NULL;
     }
-    hashtab->arr_size = n;
-    hashtab->size = 0;
+    h->arr_size = n;
+    h->size = 0;
     for (size_t i = 0; i < n; i++) {
-        hashtab->arr[i] = NULL;
+        h->arr[i] = NULL;
     }
-    return hashtab;
+    return h;
 }

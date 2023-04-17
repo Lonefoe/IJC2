@@ -7,7 +7,9 @@
 #include "htab.h"
 #include "htab_struct.h"
 
-size_t htab_bucket_count(const htab_t * t)
+void htab_free(htab_t * t)
 {
-    return t->arr_size;
+    htab_clear(t);
+    free(t->arr);
+    free(t);
 }
