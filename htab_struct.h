@@ -9,10 +9,12 @@
 
 #include "htab.h"
 
-typedef struct {
+typedef struct htab_item htab_item_t;
+
+struct htab_item {
     htab_pair_t pair;
-    struct htab *next;
-} htab_item_t;
+    htab_item_t *next;
+};
 
 struct htab {
     size_t arr_size;        // velikost pole ukazatelů

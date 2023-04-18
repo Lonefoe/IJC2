@@ -9,7 +9,7 @@
 
 htab_t* htab_init(const size_t n)
 {
-    htab_t *h = malloc(sizeof(htab_t) + n * sizeof(htab_pair_t *));
+    htab_t *h = malloc(sizeof(htab_t) + n * sizeof(htab_item_t *));
     if (h == NULL) {
         return NULL;
     }

@@ -25,6 +25,11 @@ void cb_put(cbuffer *cb, char *line) {
     
     if(cb->buffer[cb->head] == NULL) cb->buffer[cb->head] = malloc((strlen(line) + 1) * sizeof(char));
     else cb->buffer[cb->head] = realloc(cb->buffer[cb->head], (strlen(line) + 1) * sizeof(char));
+    if(cb->buffer[cb->head] == NULL) {
+        fprintf(stderr, "Error: Line memory allocation failed.\n");
+        exit(1);
+    }
+
     strncpy(cb->buffer[cb->head++], line, (strlen(line) + 1) * sizeof(char));
     cb->head %= cb->size;
     if(cb->tail == -1) cb->tail = 0;    // Init tail
