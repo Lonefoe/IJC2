@@ -6,6 +6,7 @@
 
 #include "htab.h"
 #include "htab_struct.h"
+#include <stdio.h>
 
 htab_pair_t* htab_lookup_add(htab_t * t, htab_key_t key)
 {
@@ -22,11 +23,15 @@ htab_pair_t* htab_lookup_add(htab_t * t, htab_key_t key)
     if (item == NULL) {
         return NULL;
     }
+
+    char *new_key = malloc((strlen(key) + 1) * sizeof(char));
+    strncpy(new_key, key, strlen(key) + 1);
+    
+    item->pair.key = new_key;
+    item->pair.value = 0;
     
     item->next = t->arr[index];
     t->arr[index] = item;
-    item->pair.key = key;
-    item->pair.value = 0;
 
     t->size++;
     return &item->pair;

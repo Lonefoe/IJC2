@@ -16,6 +16,7 @@ void htab_clear(htab_t * t)
         while(item != NULL)
         {
             htab_item_t *next = item->next;
+            free((char*)item->pair.key);
             free(item);
             item = next;
         }

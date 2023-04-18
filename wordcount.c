@@ -50,7 +50,8 @@ int main() {
         pair->value++;
     }
 
-    htab_for_each(word_table, &htab_print);
+    htab_for_each(word_table, htab_print);
 
+    htab_free(word_table);
     return 0;
 }
