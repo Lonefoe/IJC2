@@ -1,30 +1,34 @@
-// tail.c
+// htab_lookup_add.c
 // Řešení IJC-DU2, příklad 2), 15.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
-// 
+// Vrací ukazatel na dvojici (buď nově vytvořenou nebo již existující)
+// Při chybě s pamětí vrací NULL
 
 #include "htab.h"
 #include "htab_struct.h"
 #include <stdio.h>
 
 htab_pair_t* htab_lookup_add(htab_t * t, htab_key_t key)
-{
+{   
+    htab_pair_t *pair = htab_find(t, key);
+    if(pair != NULL) return pair;
+
     size_t index = htab_hash_function(key) % t->arr_size;
     htab_item_t *item = t->arr[index];
-    
-    while (item != NULL) {
-        if (strcmp(item->pair.key, key) == 0) {
-            return &item->pair;
-        }
-        item = item->next;
-    }
+
     item = malloc(sizeof(htab_item_t));
     if (item == NULL) {
         return NULL;
     }
 
     char *new_key = malloc((strlen(key) + 1) * sizeof(char));
+
+    if(new_key == NULL) {
+        free(new_key);
+        return NULL;
+    }
+
     strncpy(new_key, key, strlen(key) + 1);
     
     item->pair.key = new_key;

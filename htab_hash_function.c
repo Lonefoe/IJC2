@@ -1,8 +1,8 @@
-// tail.c
+// htab_hash_function.c
 // Řešení IJC-DU2, příklad 2), 15.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
-// Definuje hashovaci funkci
+// Definuje hashovaci funkci (ze zadani)
 
 #include "htab.h"
 #include <stdio.h>

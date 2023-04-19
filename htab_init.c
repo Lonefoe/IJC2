@@ -1,8 +1,8 @@
-// tail.c
+// htab_init.c
 // Řešení IJC-DU2, příklad 2), 15.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
-// 
+// Vytváří a alokuje novou hashovací tabulku
 
 #include "htab.h"
 #include "htab_struct.h"

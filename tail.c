@@ -25,6 +25,8 @@ int main(int argc, char** argv) {
     FILE *file = NULL;
     bool full_flag = 0;
 
+    filename = argv[1];
+
     // User arguments
     for (int i = 0; i < argc; i++)
     {
@@ -39,18 +41,17 @@ int main(int argc, char** argv) {
                     fprintf(stderr, "Error: Invalid number. Accepted range: 1..N\n");
                     exit(1);
                 }
+
+                filename = argv[i+2];
             }
-        } else {
-            filename = argv[i];
         }
     }
 
     if(filename != NULL) {
         file = fopen(filename, "r");
 
-        if(file == NULL)
-        {
-            fprintf(stderr, "Error: Cannot open file\n");
+        if(file == NULL) {
+            fprintf(stderr, "Error: File cannot open for reading.\n");
             exit(1);
         }
     } else file = stdin;    // Read from standard input

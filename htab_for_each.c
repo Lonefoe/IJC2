@@ -1,8 +1,8 @@
-// tail.c
+// htab_for_each.c
 // Řešení IJC-DU2, příklad 2), 15.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
-// 
+// Volá funkci na každém záznamu tabulky
 
 #include "htab.h"
 #include "htab_struct.h"
