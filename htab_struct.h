@@ -17,9 +17,9 @@ struct htab_item {
 };
 
 struct htab {
-    size_t arr_size;        // velikost pole ukazatelů
-    size_t size;            // počet prvků v tabulce
-    htab_item_t *arr[];     // pole ukazatelů na prvky tabulky
+    size_t arr_size;        // hash table capacity
+    size_t size;            // item count
+    htab_item_t *arr[];     // item pointer array
 };
 
 #endif // HTAB_STRUCT_H

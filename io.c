@@ -11,7 +11,7 @@
 int read_word(char* s, int max, FILE *f)
 {
     int c = 0;
-    int len = 0;
+    int length = 0;
     static int warning = 0;
 
     // Skip leading whitespace
@@ -21,15 +21,16 @@ int read_word(char* s, int max, FILE *f)
         return EOF;
     }
 
-    s[len++] = c;
-
-    while ((c = fgetc(f)) != EOF && !isspace(c) && len < max) {
-        s[len++] = c;
+    while (c != EOF && !isspace(c)) {
+        if(length >= max) break;
+        
+        s[length++] = c;
+        c = fgetc(f);
     }
 
-    s[len] = '\0';
+    s[length] = '\0';   // add null terminator
 
-    if (len >= max && !isspace(c)) {
+    if (length >= max && !isspace(c)) {
         if(warning != 1) {
             fprintf(stderr, "Warning: Word is too long! Max length is %d.\n", max);
             warning = 1;
@@ -38,5 +39,5 @@ int read_word(char* s, int max, FILE *f)
         while ((c = fgetc(f)) != EOF && !isspace(c));
     }
     
-    return len;
+    return length;
 }

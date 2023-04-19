@@ -1,4 +1,4 @@
-// io.c
+// io.h
 // Řešení IJC-DU2, příklad 2), 18.4.2023
 // Autor: Krystof Knesl, FIT
 // Přeloženo: gcc 10.2
