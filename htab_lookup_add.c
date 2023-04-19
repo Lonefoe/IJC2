@@ -29,7 +29,7 @@ htab_pair_t* htab_lookup_add(htab_t * t, htab_key_t key)
         return NULL;
     }
 
-    strncpy(new_key, key, strlen(key) + 1);
+    strcpy(new_key, key);
     
     item->pair.key = new_key;
     item->pair.value = 0;
